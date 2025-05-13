@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Package Compressed="yes" Id="AMobile.StarTrek" Name="StarTrek"
+           Manufacturer="StarTrek" Version="1.0.0">
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="StarTrek">
+          <Component Id="MainProgram">
+    	    <File Id="StarTrek.exe" Source="StarTrek.exe" />
+          </Component>
+          <Component Id="MainProgram_license">
+    	    <File Source="StarTrek.exe.license.txt" />
+          </Component>
+	  <Component Id="Instructions">
+    	    <File Source="TrekInst.exe" />
+          </Component>
+	  <Component Id="Instructions_license">
+    	    <File Source="TrekInst.exe.license.txt" />
+          </Component>
+	  <Component Id="StarTrek_src">
+   	    <File Source="StarTrek.BAS" />
+          </Component>
+	  <Component Id="TrekInst_src">
+    	    <File Source="TrekInst.BAS" />
+          </Component>
+	  <Component Id="Trek_ICO">
+    	    <File Source="StarTrek.ICO" />
+          </Component>
+        </Directory>
+    </Directory>
+    <Directory Id="ProgramMenuFolder">
+    	<Directory Id="ApplicationProgramsFolder" Name="StarTrek"/>
+    </Directory>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+    	<Component Id="ApplicationShortcut">
+        	<Shortcut Id="ApplicationStartMenuShortcut"
+                	Name="StarTrek"
+                	Description="StarTrek game"
+                	Target="[#StarTrek.exe]" />
+        	<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        	<RegistryValue Root="HKCU" Key="Software\AMobile\StarTrek" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+    	</Component>
+    </DirectoryRef>
+    <Feature Id="Executable">
+      <ComponentRef Id="MainProgram" />
+      <ComponentRef Id="MainProgram_license" />
+      <ComponentRef Id="ApplicationShortcut" />
+    </Feature>
+    <Feature Id="InstructionExecutable">
+      <ComponentRef Id="Instructions" />
+      <ComponentRef Id="Instructions_license" />
+    </Feature>
+    <Feature Id="SourceFiles">
+      <ComponentRef Id="StarTrek_src" />
+      <ComponentRef Id="TrekInst_src" />
+      <ComponentRef Id="Trek_ICO" />
+
+    </Feature>
+    </Package>
+</Wix>
