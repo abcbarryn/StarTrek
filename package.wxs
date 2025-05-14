@@ -5,6 +5,8 @@
 
     <MediaTemplate EmbedCab="yes" />
 
+    <Icon Id="icon.ico" SourceFile="StarTrek.ICO"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <Directory Id="ProgramFiles64Folder">
         <Directory Id="INSTALLFOLDER" Name="StarTrek">
           <Component Id="MainProgram">
